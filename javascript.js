@@ -134,7 +134,7 @@ class PerderEscena extends Phaser.Scene {
 
         // Mostrar el tiempo transcurrido en dos líneas
         const timeElapsed = data.timeElapsed;
-        const timeLabel = 'Tiempo';
+        const timeLabel = 'TIME';
         const timeValue = `${Math.floor(timeElapsed / 1000)} segundos`;
 
         // Estilo para el texto
