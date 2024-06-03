@@ -122,9 +122,7 @@ class Escena extends Phaser.Scene {
 
 class PerderEscena extends Phaser.Scene {
     constructor() {
-        super({
-            key: 'perderScene'
-        });
+        super({ key: 'perderScene' });
     }
 
     preload() {
@@ -134,14 +132,21 @@ class PerderEscena extends Phaser.Scene {
     create(data) {
         this.add.image(480, 320, 'perder');
 
-        // Mostrar el tiempo transcurrido
+        // Mostrar el tiempo transcurrido en dos líneas
         const timeElapsed = data.timeElapsed;
-        const timeText = `Tiempo: ${Math.floor(timeElapsed / 1000)} segundos`;
-        this.add.text(240, 320/3, timeText, { fontSize: '32px', fill: '#fff' }).setOrigin(0.5);
+        const timeLabel = 'Tiempo';
+        const timeValue = `${Math.floor(timeElapsed / 1000)} segundos`;
 
-        this.input.keyboard.on('keydown', function (event) {
+        // Estilo para el texto
+        const textStyle = { fontSize: '32px', fill: '#fff', fontStyle: 'bold', stroke: '#000', strokeThickness: 6 };
+
+        // Añadir el texto en dos líneas
+        this.add.text(200, 100 - 20, timeLabel, textStyle).setOrigin(0.5);
+        this.add.text(200, 100   + 20, timeValue, textStyle).setOrigin(0.5);
+
+        this.input.keyboard.on('keydown', (event) => {
             if (event.keyCode === 32) {
-                this.scene.volverAJugar();
+                this.volverAJugar();
             }
         });
 
@@ -151,8 +156,8 @@ class PerderEscena extends Phaser.Scene {
     volverAJugar() {
         this.scene.start('Escena');
     }
-
 }
+
 
 function resize() {
     const canvas = document.querySelector("canvas");
