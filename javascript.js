@@ -137,7 +137,7 @@ class PerderEscena extends Phaser.Scene {
         // Mostrar el tiempo transcurrido
         const timeElapsed = data.timeElapsed;
         const timeText = `Tiempo: ${Math.floor(timeElapsed / 1000)} segundos`;
-        this.add.text(480, 320, timeText, { fontSize: '32px', fill: '#fff' }).setOrigin(0.5);
+        this.add.text(240, 106, timeText, { fontSize: '42px', fill: '#fff' }).setOrigin(0.5);
 
         this.input.keyboard.on('keydown', function (event) {
             if (event.keyCode === 32) {
@@ -151,7 +151,7 @@ class PerderEscena extends Phaser.Scene {
     volverAJugar() {
         this.scene.start('Escena');
     }
-    
+
 }
 
 function resize() {
