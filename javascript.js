@@ -1,4 +1,8 @@
 class Escena extends Phaser.Scene {
+    constructor() {
+        super({ key: 'Escena' });
+        this.startTime = 0;
+    }
 
     preload() {
         //this.load.baseURL = '/curso/phaser/ex/flappy-bird/';
@@ -20,6 +24,7 @@ class Escena extends Phaser.Scene {
     }
 
     create() {
+        this.startTime = this.time.now; // Registrar el tiempo de inicio del juego
         this.bg = this.add.tileSprite(480, 320, 960, 640, 'fondo').setScrollFactor(0);
         this.player = this.physics.add.sprite(50, 200, 'heroe');
 
@@ -107,7 +112,7 @@ class Escena extends Phaser.Scene {
     }
 
     hitColumna() {
-        this.scene.start('perderScene');
+        this.scene.start('perderScene', { timeElapsed: this.time.now - this.startTime }); // Pasar el tiempo transcurrido a la escena de perder
     }
 
     update(time) {
@@ -126,8 +131,13 @@ class PerderEscena extends Phaser.Scene {
         this.load.image('perder', 'img/perder-juego.jpg');
     }
 
-    create() {
+    create(data) {
         this.add.image(480, 320, 'perder');
+
+        // Mostrar el tiempo transcurrido
+        const timeElapsed = data.timeElapsed;
+        const timeText = `Tiempo: ${Math.floor(timeElapsed / 1000)} segundos`;
+        this.add.text(480, 320, timeText, { fontSize: '32px', fill: '#fff' }).setOrigin(0.5);
 
         this.input.keyboard.on('keydown', function (event) {
             if (event.keyCode === 32) {
@@ -135,12 +145,13 @@ class PerderEscena extends Phaser.Scene {
             }
         });
 
-        this.input.on('pointerdown', () => this.saltar())
+        this.input.on('pointerdown', () => this.volverAJugar());
     }
 
     volverAJugar() {
         this.scene.start('Escena');
     }
+    
 }
 
 function resize() {

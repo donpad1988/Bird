@@ -17,7 +17,14 @@ canvas{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}</style>
+}@font-face {
+  font-family: font1;
+  src: url('img/redkost-comic.otf');
+  font-weight: 400;
+  font-weight: normal;
+}
+
+</style>
   <script src="phaser.min.js"></script>
   
 <script src="javascript.js"></script>  
@@ -26,7 +33,7 @@ canvas{
 </head>
 <body>
 <h1>Flappy Bird con Phaser - colisión con tuberías</h1>
-
+<div style="font-family:font1;position: absolute;left: -1000px;visibility: hidden;">.</div>
 	
 </body>
 </html>
